@@ -1,0 +1,963 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Catálogo de produtos - perfumes, automotivo, eletrônicos, casa e variedades.">
+  <title>TopVariedades | Catálogo</title>
+  <meta name="theme-color" content="#111418">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🛒</text></svg>">
+
+  <style>
+    :root{
+      --dark:#111418;
+      --dark2:#191d22;
+      --yellow:#ffd400;
+      --green:#20c763;
+      --green-dark:#159447;
+      --bg:#f5f6f8;
+      --white:#fff;
+      --text:#171a1f;
+      --muted:#6b7280;
+      --border:#e4e7eb;
+      --shadow:0 8px 25px rgba(0,0,0,.07);
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family:Arial,Helvetica,sans-serif;
+      background:var(--bg);
+      color:var(--text);
+    }
+    button,input{font:inherit}
+    a{text-decoration:none;color:inherit}
+
+    /* TOPO */
+    .topbar{
+      background:var(--dark);
+      color:#fff;
+      min-height:72px;
+      display:flex;
+      align-items:center;
+      gap:28px;
+      padding:10px 4%;
+    }
+
+    .logo{
+      min-width:235px;
+      font-weight:900;
+      font-size:25px;
+      letter-spacing:-1px;
+    }
+    .logo span{color:var(--yellow)}
+    .logo small{
+      display:block;
+      color:#aeb4bc;
+      font-size:10px;
+      letter-spacing:.2px;
+      margin-top:2px;
+    }
+
+    .search{
+      flex:1;
+      max-width:620px;
+      position:relative;
+    }
+    .search input{
+      width:100%;
+      border:0;
+      outline:0;
+      border-radius:25px;
+      padding:14px 48px 14px 20px;
+      background:#fff;
+      color:#222;
+    }
+    .search button{
+      position:absolute;
+      right:5px;
+      top:5px;
+      width:38px;
+      height:38px;
+      border:0;
+      border-radius:50%;
+      background:#f0f1f2;
+      cursor:pointer;
+    }
+
+    .top-actions{
+      margin-left:auto;
+      display:flex;
+      align-items:center;
+      gap:22px;
+      white-space:nowrap;
+    }
+    .top-actions a{
+      color:#fff;
+      font-size:13px;
+    }
+    .whats-top{
+      display:flex;
+      align-items:center;
+      gap:7px;
+    }
+    .whats-icon{color:var(--green);font-size:23px}
+
+    /* MENU */
+    .menu{
+      background:var(--dark2);
+      color:#fff;
+      display:flex;
+      align-items:center;
+      gap:26px;
+      padding:0 4%;
+      min-height:45px;
+      overflow:auto;
+    }
+    .menu a{
+      padding:14px 0 11px;
+      font-size:14px;
+      white-space:nowrap;
+      border-bottom:3px solid transparent;
+    }
+    .menu a:hover,.menu a.active{
+      color:var(--yellow);
+      border-bottom-color:var(--yellow);
+    }
+
+    /* HERO */
+    .hero{
+      max-width:1400px;
+      margin:0 auto;
+      min-height:340px;
+      border-radius:0 0 18px 18px;
+      overflow:hidden;
+      background:
+        linear-gradient(90deg,rgba(0,0,0,.94) 0%,rgba(0,0,0,.78) 45%,rgba(0,0,0,.20) 100%),
+        radial-gradient(circle at 78% 40%,#8a6b48 0,#27201b 25%,#080909 58%);
+      color:#fff;
+      display:flex;
+      align-items:center;
+      padding:50px 6%;
+      position:relative;
+    }
+    .hero:after{
+      content:"PERFUMES • AUTOMOTIVO • ELETRÔNICOS • CASA • FERRAMENTAS";
+      position:absolute;
+      right:5%;
+      bottom:32px;
+      color:#d5d8dc;
+      opacity:.7;
+      font-size:12px;
+      letter-spacing:1.4px;
+    }
+    .hero-content{max-width:650px}
+    .hero h1{
+      margin:0 0 14px;
+      font-size:clamp(34px,5vw,58px);
+      line-height:1.02;
+      letter-spacing:-2px;
+    }
+    .hero h1 span{color:var(--yellow)}
+    .hero p{
+      margin:0 0 25px;
+      color:#e4e7eb;
+      font-size:18px;
+      line-height:1.5;
+    }
+    .hero-pills{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+    }
+    .pill{
+      border:1px solid #454b52;
+      background:rgba(255,255,255,.07);
+      padding:10px 13px;
+      border-radius:8px;
+      font-size:13px;
+    }
+
+    /* CONTEÚDO */
+    main{
+      max-width:1400px;
+      margin:auto;
+      padding:34px 4% 80px;
+    }
+    .section-head{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:15px;
+      margin:0 0 18px;
+    }
+    .section-head h2{
+      margin:0;
+      font-size:24px;
+    }
+    .section-head span{
+      color:var(--muted);
+      font-size:14px;
+    }
+
+    /* CATEGORIAS */
+    .categories{
+      display:grid;
+      grid-template-columns:repeat(7,1fr);
+      gap:14px;
+      margin-bottom:42px;
+    }
+    .category{
+      border:1px solid var(--border);
+      background:#fff;
+      border-radius:14px;
+      padding:20px 12px;
+      text-align:center;
+      cursor:pointer;
+      transition:.2s;
+    }
+    .category:hover{
+      transform:translateY(-3px);
+      box-shadow:var(--shadow);
+    }
+    .category .emoji{font-size:38px;display:block;margin-bottom:9px}
+    .category strong{font-size:14px}
+
+    /* PRODUTOS */
+    .layout{
+      display:grid;
+      grid-template-columns:minmax(0,1fr) 320px;
+      gap:25px;
+      align-items:start;
+    }
+    .products{
+      display:grid;
+      grid-template-columns:repeat(4,minmax(0,1fr));
+      gap:18px;
+    }
+    .product{
+      background:#fff;
+      border:1px solid var(--border);
+      border-radius:14px;
+      overflow:hidden;
+      box-shadow:0 3px 12px rgba(0,0,0,.035);
+      display:flex;
+      flex-direction:column;
+      min-width:0;
+    }
+    .product-img{
+      height:220px;
+      background:#eef0f2;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      overflow:hidden;
+      position:relative;
+    }
+    .product-img img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+    }
+    .placeholder{
+      text-align:center;
+      color:#89919b;
+      font-size:44px;
+    }
+    .badge{
+      position:absolute;
+      top:10px;
+      left:10px;
+      background:#fff;
+      border-radius:7px;
+      padding:6px 9px;
+      font-size:11px;
+      font-weight:800;
+      color:#28679c;
+      box-shadow:0 2px 8px rgba(0,0,0,.1);
+    }
+    .product-info{
+      padding:15px;
+      display:flex;
+      flex-direction:column;
+      flex:1;
+    }
+    .product-category{
+      color:#697386;
+      text-transform:uppercase;
+      font-size:10px;
+      font-weight:800;
+      margin-bottom:7px;
+    }
+    .product-name{
+      font-size:16px;
+      font-weight:800;
+      line-height:1.35;
+      min-height:43px;
+    }
+    .product-code,.product-condition{
+      color:var(--muted);
+      font-size:12px;
+      margin-top:6px;
+    }
+    .product-price{
+      font-size:22px;
+      font-weight:900;
+      margin:12px 0;
+    }
+    .product-buttons{
+      display:grid;
+      grid-template-columns:1fr;
+      gap:8px;
+      margin-top:auto;
+    }
+    .btn{
+      border:0;
+      border-radius:9px;
+      padding:11px 9px;
+      cursor:pointer;
+      font-weight:800;
+      font-size:13px;
+    }
+    .btn-whatsapp{
+      background:var(--green);
+      color:#fff;
+    }
+    .btn-whatsapp:hover{background:var(--green-dark)}
+    .btn-link{
+      background:var(--yellow);
+      color:#171717;
+    }
+
+    /* SELEÇÃO */
+    .selection{
+      background:#fff;
+      border:1px solid var(--border);
+      border-radius:14px;
+      box-shadow:var(--shadow);
+      position:sticky;
+      top:15px;
+      overflow:hidden;
+    }
+    .selection-head{
+      padding:16px;
+      border-bottom:1px solid var(--border);
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+    }
+    .selection-head strong{font-size:16px}
+    .selection-count{
+      background:var(--yellow);
+      padding:4px 8px;
+      border-radius:20px;
+      font-size:12px;
+      font-weight:900;
+    }
+    .selection-items{padding:8px 15px}
+    .selection-empty{
+      color:var(--muted);
+      font-size:13px;
+      text-align:center;
+      padding:22px 8px;
+      line-height:1.5;
+    }
+    .selected-item{
+      display:grid;
+      grid-template-columns:52px 1fr auto;
+      gap:10px;
+      align-items:center;
+      padding:10px 0;
+      border-bottom:1px solid #eee;
+    }
+    .selected-item:last-child{border-bottom:0}
+    .selected-thumb{
+      width:52px;
+      height:52px;
+      border-radius:8px;
+      background:#f0f1f2;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      overflow:hidden;
+      font-size:23px;
+    }
+    .selected-thumb img{width:100%;height:100%;object-fit:cover}
+    .selected-name{font-size:12px;font-weight:800;line-height:1.3}
+    .selected-price{font-size:11px;color:var(--muted);margin-top:4px}
+    .remove{
+      border:0;
+      background:none;
+      color:#9ca3af;
+      cursor:pointer;
+      font-size:17px;
+    }
+    .selection-bottom{
+      border-top:1px solid var(--border);
+      padding:15px;
+    }
+    .total{
+      display:flex;
+      justify-content:space-between;
+      font-weight:900;
+      margin-bottom:12px;
+    }
+    .send-selection{
+      width:100%;
+      background:var(--green);
+      color:#fff;
+      border:0;
+      padding:13px;
+      border-radius:9px;
+      font-weight:900;
+      cursor:pointer;
+    }
+    .clear{
+      width:100%;
+      background:none;
+      border:0;
+      color:#777;
+      padding:9px;
+      cursor:pointer;
+      font-size:12px;
+    }
+
+    .why{
+      margin-top:18px;
+      background:#fff;
+      border:1px solid var(--border);
+      border-radius:14px;
+      padding:18px;
+    }
+    .why h3{margin:0 0 13px;font-size:16px}
+    .why p{font-size:12px;color:var(--muted);line-height:1.5;margin:10px 0}
+
+    /* WHATSAPP FLUTUANTE */
+    .floating-whatsapp{
+      position:fixed;
+      right:22px;
+      bottom:22px;
+      width:58px;
+      height:58px;
+      border-radius:50%;
+      background:var(--green);
+      color:#fff;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-size:29px;
+      box-shadow:0 7px 22px rgba(0,0,0,.22);
+      z-index:20;
+    }
+
+    /* RODAPÉ */
+    footer{
+      background:var(--dark);
+      color:#c6cbd2;
+      padding:38px 4% 22px;
+    }
+    .footer-grid{
+      max-width:1400px;
+      margin:auto;
+      display:grid;
+      grid-template-columns:2fr 1fr 1fr 1fr;
+      gap:35px;
+    }
+    footer h3,footer h4{color:#fff;margin-top:0}
+    footer p,footer a{font-size:13px;line-height:1.7}
+    .copyright{
+      max-width:1400px;
+      margin:30px auto 0;
+      border-top:1px solid #2d3239;
+      padding-top:18px;
+      font-size:11px;
+      color:#858d97;
+    }
+
+    /* MELHORIAS */
+    :focus-visible{outline:3px solid var(--yellow);outline-offset:2px}
+    .search input:focus-visible{outline:3px solid var(--yellow);outline-offset:0}
+    .hero-cta{display:inline-block;margin-top:22px;background:var(--yellow);color:#111;font-weight:900;padding:14px 26px;border-radius:10px}
+    .hero-cta:hover{filter:brightness(.93)}
+    .category{font:inherit;color:inherit;width:100%}
+    .head-tools{display:flex;align-items:center;gap:12px}
+    .sort{border:1px solid var(--border);border-radius:8px;padding:8px 10px;background:#fff;color:var(--text);font-size:13px}
+    .btn{display:block;text-align:center}
+    .btn-whatsapp.added{background:#fff;color:var(--green-dark);box-shadow:inset 0 0 0 2px var(--green)}
+    .btn-ask{background:#fff;color:#171717;box-shadow:inset 0 0 0 1px var(--border)}
+    .btn-ask:hover{background:#f5f6f8}
+    .btn:disabled{background:#e4e7eb;color:#8a919b;cursor:not-allowed}
+    .empty{display:none;text-align:center;color:var(--muted);padding:50px 18px;background:#fff;border:1px dashed var(--border);border-radius:14px;line-height:1.6}
+    .empty a{color:var(--green-dark);font-weight:800;text-decoration:underline}
+    .mobile-bar{display:none;position:fixed;left:0;right:0;bottom:0;z-index:25;border:0;background:var(--dark);color:#fff;padding:14px 5%;justify-content:space-between;align-items:center;font-weight:800;cursor:pointer}
+    .mobile-bar b{color:var(--yellow)}
+    @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
+
+    /* RESPONSIVO */
+    @media(max-width:1150px){
+      .products{grid-template-columns:repeat(3,minmax(0,1fr))}
+      .categories{grid-template-columns:repeat(3,1fr)}
+      .top-actions{gap:10px}
+      .logo{min-width:190px}
+    }
+    @media(max-width:900px){
+      .mobile-bar.show{display:flex}
+      body.has-bar main{padding-bottom:110px}
+      body.has-bar .floating-whatsapp{bottom:76px}
+      .topbar{flex-wrap:wrap}
+      .logo{min-width:auto}
+      .search{order:3;flex-basis:100%;max-width:none}
+      .top-actions{margin-left:auto}
+      .layout{grid-template-columns:1fr}
+      .selection{position:static}
+      .products{grid-template-columns:repeat(2,minmax(0,1fr))}
+      .hero{border-radius:0}
+      .footer-grid{grid-template-columns:repeat(2,1fr)}
+    }
+    @media(max-width:600px){
+      .topbar{padding:12px 4%}
+      .top-actions a:not(.whats-top){display:none}
+      .whats-top{font-size:12px}
+      .menu{gap:20px;padding:0 4%}
+      .hero{padding:38px 6%;min-height:390px}
+      .hero h1{font-size:38px}
+      .hero p{font-size:16px}
+      .hero:after{display:none}
+      main{padding:25px 4% 65px}
+      .categories{grid-template-columns:repeat(2,1fr)}
+      .products{grid-template-columns:1fr 1fr;gap:11px}
+      .product-img{height:160px}
+      .product-info{padding:11px}
+      .product-name{font-size:14px}
+      .product-price{font-size:18px}
+      .btn{font-size:11px;padding:10px 5px}
+      .footer-grid{grid-template-columns:1fr}
+    }
+    @media(max-width:380px){
+      .products{grid-template-columns:1fr}
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <div class="topbar">
+      <div class="logo">
+        🛒 Top<span>Variedades</span>
+        <small>Qualidade e praticidade em um só lugar</small>
+      </div>
+
+      <div class="search">
+        <input id="searchInput" type="search" placeholder="O que você procura?">
+        <button onclick="filterProducts()" aria-label="Buscar">🔎</button>
+      </div>
+
+      <div class="top-actions">
+        <a class="whats-top" id="topWhats" href="#" target="_blank">
+          <span class="whats-icon">◉</span>
+          <span>Fale conosco<br><b>(34) 99729-1822</b></span>
+        </a>
+      </div>
+    </div>
+
+    <nav class="menu">
+      <a href="#" class="active" onclick="setCategory('Todos');return false;">Início</a>
+      <a href="#produtos" onclick="setCategory('Perfumes');return false;">Perfumes</a>
+      <a href="#produtos" onclick="setCategory('Automotivo');return false;">Automotivo</a>
+      <a href="#produtos" onclick="setCategory('Eletrônicos');return false;">Eletrônicos</a>
+      <a href="#produtos" onclick="setCategory('Casa');return false;">Casa</a>
+      <a href="#produtos" onclick="setCategory('Ferramentas');return false;">Ferramentas</a>
+      <a href="#produtos" onclick="setCategory('Acessórios');return false;">Acessórios</a>
+      <a href="#produtos" onclick="setCategory('Outros');return false;">Outros</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <div class="hero-content">
+      <h1>Tudo o que você precisa,<br><span>em um só lugar!</span></h1>
+      <p>Perfumes, peças automotivas, eletrônicos, casa, ferramentas e muito mais.</p>
+      <div class="hero-pills">
+        <div class="pill">✓ Produtos de qualidade</div>
+        <div class="pill">🚚 Envio para todo o Brasil</div>
+        <div class="pill">🔒 Compra segura e prática</div>
+      </div>
+      <a class="hero-cta" href="#produtos">Ver produtos</a>
+    </div>
+  </section>
+
+  <main>
+    <section>
+      <div class="section-head">
+        <h2>Categorias</h2>
+        <span>Escolha uma categoria</span>
+      </div>
+
+      <div class="categories">
+        <button type="button" class="category" onclick="setCategory('Perfumes')"><span class="emoji">🌸</span><strong>Perfumes</strong></button>
+        <button type="button" class="category" onclick="setCategory('Automotivo')"><span class="emoji">🚗</span><strong>Automotivo</strong></button>
+        <button type="button" class="category" onclick="setCategory('Eletrônicos')"><span class="emoji">📱</span><strong>Eletrônicos</strong></button>
+        <button type="button" class="category" onclick="setCategory('Casa')"><span class="emoji">🏠</span><strong>Casa</strong></button>
+        <button type="button" class="category" onclick="setCategory('Ferramentas')"><span class="emoji">🧰</span><strong>Ferramentas</strong></button>
+        <button type="button" class="category" onclick="setCategory('Acessórios')"><span class="emoji">🎧</span><strong>Acessórios</strong></button>
+        <button type="button" class="category" onclick="setCategory('Outros')"><span class="emoji">🎁</span><strong>Outros</strong></button>
+      </div>
+    </section>
+
+    <section id="produtos">
+      <div class="section-head">
+        <h2>Produtos</h2>
+        <div class="head-tools">
+          <span id="resultCount" aria-live="polite"></span>
+          <select class="sort" id="sortSelect" aria-label="Ordenar produtos" onchange="applyFilters()">
+            <option value="">Ordenar</option>
+            <option value="asc">Menor preço</option>
+            <option value="desc">Maior preço</option>
+            <option value="az">Nome (A–Z)</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="layout">
+        <div>
+          <div class="products" id="productsGrid"></div>
+          <div class="empty" id="emptyState">Nenhum produto encontrado.</div>
+        </div>
+
+        <aside>
+          <div class="selection" id="selecao">
+            <div class="selection-head">
+              <strong>🛒 Sua seleção</strong>
+              <span class="selection-count" id="selectionCount">0</span>
+            </div>
+
+            <div class="selection-items" id="selectionItems">
+              <div class="selection-empty">
+                Você ainda não selecionou nenhum produto.<br>
+                Clique em <b>Tenho interesse</b> para adicionar.
+              </div>
+            </div>
+
+            <div class="selection-bottom">
+              <div class="total">
+                <span>Total</span>
+                <span id="selectionTotal">R$ 0,00</span>
+              </div>
+              <button class="send-selection" onclick="sendSelection()">
+                🟢 Enviar seleção pelo WhatsApp
+              </button>
+              <button class="clear" onclick="clearSelection()">Limpar seleção</button>
+            </div>
+          </div>
+
+          <div class="why">
+            <h3>Por que comprar aqui?</h3>
+            <p>✓ Atendimento rápido pelo WhatsApp</p>
+            <p>✓ Produtos novos e usados, conforme descrição</p>
+            <p>✓ Envio para todo o Brasil</p>
+            <p>✓ Consulte disponibilidade antes da compra</p>
+          </div>
+        </aside>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-grid">
+      <div>
+        <h3>🛒 Top<span style="color:#ffd400">Variedades</span></h3>
+        <p>Qualidade e praticidade em um só lugar.</p>
+      </div>
+      <div>
+        <h4>Categorias</h4>
+        <p><a href="#produtos" onclick="setCategory('Perfumes');return false;">Perfumes</a><br>
+        <a href="#produtos" onclick="setCategory('Automotivo');return false;">Automotivo</a><br>
+        <a href="#produtos" onclick="setCategory('Eletrônicos');return false;">Eletrônicos</a></p>
+      </div>
+      <div>
+        <h4>Atendimento</h4>
+        <p>WhatsApp<br>(34) 99729-1822</p>
+      </div>
+      <div>
+        <h4>Informações</h4>
+        <p>Consulte disponibilidade, preço e condições de envio pelo WhatsApp.</p>
+      </div>
+    </div>
+    <div class="copyright">© <span id="year">2026</span> TopVariedades. Todos os direitos reservados.</div>
+  </footer>
+
+  <button type="button" class="mobile-bar" id="mobileBar" onclick="document.getElementById('selecao').scrollIntoView({behavior:'smooth'})">
+    <span>🛒 Sua seleção (<span id="barCount">0</span>)</span><b id="barTotal">R$ 0,00</b>
+  </button>
+
+  <a class="floating-whatsapp" id="floatingWhats" href="#" target="_blank" aria-label="Falar pelo WhatsApp">◉</a>
+
+  <script>
+    // ==========================================================
+    // CONFIGURAÇÃO
+    // ==========================================================
+    const WHATSAPP = "5534997291822";
+
+    // ==========================================================
+    // PRODUTOS DE EXEMPLO
+    // Troque/adapte estes produtos pelos seus produtos reais.
+    // image pode receber uma URL ou ficar vazio para usar o emoji.
+    // mercadoLivre pode receber o link do anúncio ou ficar vazio.
+    // ==========================================================
+    const products = [
+      // Cadastre seus produtos aqui manualmente.
+      // Exemplo:
+      // {
+      //   id: 1,
+      //   name: "Nome do produto",
+      //   category: "Perfumes",
+      //   code: "PROD-001",
+      //   price: 99.90,
+      //   condition: "Novo",
+      //   emoji: "🌸",
+      //   image: "images/produto.jpg",
+      //   mercadoLivre: ""
+      // }
+    ];
+
+    let selected = [];
+    let currentCategory = "Todos";
+
+    function money(value){
+      return (Number(value)||0).toLocaleString("pt-BR",{style:"currency",currency:"BRL"});
+    }
+
+    // Aceita apenas links http(s) ou caminhos relativos (evita javascript: etc.)
+    function safeUrl(url){
+      const u = String(url||"").trim();
+      return /^(https?:\/\/|[\w./-])/i.test(u) && !/^\s*(javascript|data):/i.test(u) ? u : "";
+    }
+
+    function whatsappUrl(message){
+      return "https://wa.me/" + WHATSAPP + "?text=" + encodeURIComponent(message);
+    }
+
+    function productMessage(product){
+      return `Olá! Tenho interesse neste produto:
+
+📦 ${product.name}
+🏷️ Código: ${product.code}
+💰 Valor: ${money(product.price)}
+📌 Condição: ${product.condition}
+
+Gostaria de saber se está disponível e o valor do frete.`;
+    }
+
+    function renderProducts(list = products){
+      const grid = document.getElementById("productsGrid");
+      const empty = document.getElementById("emptyState");
+      const count = document.getElementById("resultCount");
+
+      grid.innerHTML = "";
+      count.textContent = `${list.length} produto${list.length === 1 ? "" : "s"}`;
+
+      if(!list.length){
+        empty.innerHTML = products.length
+          ? `Nenhum produto encontrado.<br>Tente outra busca ou categoria, ou <a href="${whatsappUrl("Olá! Não encontrei o que procurava no catálogo.")}" target="_blank" rel="noopener">pergunte pelo WhatsApp</a>.`
+          : `Estamos atualizando o catálogo.<br><a href="${whatsappUrl("Olá! Vim pelo catálogo e gostaria de ver os produtos disponíveis.")}" target="_blank" rel="noopener">Chame no WhatsApp</a> para ver as novidades.`;
+        empty.style.display = "block";
+        return;
+      }
+
+      empty.style.display = "none";
+
+      list.forEach(product => {
+        const card = document.createElement("article");
+        card.className = "product";
+
+        const imageHtml = product.image
+          ? `<img src="${escapeHtml(safeUrl(product.image))}" alt="${escapeHtml(product.name)}" loading="lazy" data-emoji="${escapeHtml(product.emoji||"📦")}" onerror="this.outerHTML='<div class=placeholder>'+this.dataset.emoji+'</div>'">`
+          : `<div class="placeholder">${product.emoji||"📦"}</div>`;
+
+        const mlButton = safeUrl(product.mercadoLivre)
+          ? `<a class="btn btn-link" href="${escapeHtml(safeUrl(product.mercadoLivre))}" target="_blank" rel="noopener">🛒 Ver anúncio</a>`
+          : "";
+
+        card.innerHTML = `
+          <div class="product-img">
+            ${imageHtml}
+            <span class="badge">${escapeHtml(product.category)}</span>
+          </div>
+          <div class="product-info">
+            <div class="product-category">${escapeHtml(product.category)}</div>
+            <div class="product-name">${escapeHtml(product.name)}</div>
+            <div class="product-code">Cód.: ${escapeHtml(product.code)}</div>
+            <div class="product-condition">${escapeHtml(product.condition)} • ${product.stock === false ? "Indisponível" : "Em estoque"}</div>
+            <div class="product-price">${money(product.price)}</div>
+            <div class="product-buttons">
+              <button class="btn btn-whatsapp" data-id="${product.id}" onclick="toggleSelected(${product.id})" ${product.stock === false ? "disabled" : ""}>Tenho interesse</button>
+              <a class="btn btn-ask" href="${whatsappUrl(productMessage(product))}" target="_blank" rel="noopener">Perguntar no WhatsApp</a>
+              ${mlButton}
+            </div>
+          </div>
+        `;
+        grid.appendChild(card);
+      });
+      syncButtons();
+    }
+
+    function escapeHtml(value){
+      return String(value).replace(/[&<>"']/g, function(char){
+        return {
+          "&":"&amp;","<":"&lt;",">":"&gt;",
+          '"':"&quot;","'":"&#039;"
+        }[char];
+      });
+    }
+
+    function toggleSelected(id){
+      const product = products.find(p => p.id === id);
+      if(!product) return;
+      selected = selected.some(p => p.id === id)
+        ? selected.filter(p => p.id !== id)
+        : [...selected, product];
+      renderSelection();
+    }
+
+    // Atualiza botões dos cards, barra mobile e salva a seleção no navegador
+    function syncButtons(){
+      document.querySelectorAll(".btn-whatsapp[data-id]").forEach(btn => {
+        if(btn.disabled) return;
+        const on = selected.some(p => p.id === Number(btn.dataset.id));
+        btn.classList.toggle("added", on);
+        btn.textContent = on ? "✓ Na seleção" : "Tenho interesse";
+      });
+    }
+    function updateExtras(){
+      const total = selected.reduce((sum,p) => sum + (Number(p.price)||0),0);
+      document.getElementById("barCount").textContent = selected.length;
+      document.getElementById("barTotal").textContent = money(total);
+      document.getElementById("mobileBar").classList.toggle("show", selected.length > 0);
+      document.body.classList.toggle("has-bar", selected.length > 0);
+      syncButtons();
+      try{ localStorage.setItem("tv_selection", JSON.stringify(selected.map(p => p.id))); }catch(e){}
+    }
+
+    function renderSelection(){
+      const box = document.getElementById("selectionItems");
+      const count = document.getElementById("selectionCount");
+      const total = document.getElementById("selectionTotal");
+
+      count.textContent = selected.length;
+      updateExtras();
+
+      if(!selected.length){
+        box.innerHTML = `
+          <div class="selection-empty">
+            Você ainda não selecionou nenhum produto.<br>
+            Clique em <b>Tenho interesse</b> para adicionar.
+          </div>`;
+        total.textContent = money(0);
+        return;
+      }
+
+      box.innerHTML = selected.map(product => `
+        <div class="selected-item">
+          <div class="selected-thumb">${product.image ? `<img src="${product.image}" alt="">` : product.emoji}</div>
+          <div>
+            <div class="selected-name">${escapeHtml(product.name)}</div>
+            <div class="selected-price">${money(product.price)}</div>
+          </div>
+          <button class="remove" onclick="removeSelected(${product.id})" aria-label="Remover">×</button>
+        </div>
+      `).join("");
+
+      total.textContent = money(selected.reduce((sum,p) => sum + p.price,0));
+    }
+
+    function removeSelected(id){
+      selected = selected.filter(p => p.id !== id);
+      renderSelection();
+    }
+
+    function clearSelection(){
+      selected = [];
+      renderSelection();
+    }
+
+    function sendSelection(){
+      if(!selected.length){
+        alert("Selecione pelo menos um produto antes de enviar.");
+        return;
+      }
+
+      const lines = selected.map((p,i) =>
+        `${i+1}. ${p.name}\n   Código: ${p.code} | ${money(p.price)} | ${p.condition}`
+      ).join("\n\n");
+
+      const total = selected.reduce((sum,p) => sum + p.price,0);
+
+      const message = `Olá! Tenho interesse nestes produtos:
+
+${lines}
+
+💰 Total dos produtos: ${money(total)}
+
+Gostaria de confirmar a disponibilidade e saber o valor do frete.`;
+
+      window.open(whatsappUrl(message), "_blank");
+    }
+
+    function applyFilters(scroll = false){
+      const term = document.getElementById("searchInput").value.toLowerCase().trim();
+      const sort = document.getElementById("sortSelect").value;
+
+      const list = products.filter(p => {
+        const categoryOk = currentCategory === "Todos" || p.category === currentCategory;
+        const termOk = !term ||
+          [p.name,p.category,p.code,p.condition].some(v => String(v||"").toLowerCase().includes(term));
+        return categoryOk && termOk;
+      });
+
+      if(sort === "asc") list.sort((a,b) => a.price - b.price);
+      if(sort === "desc") list.sort((a,b) => b.price - a.price);
+      if(sort === "az") list.sort((a,b) => a.name.localeCompare(b.name,"pt-BR"));
+
+      renderProducts(list);
+      if(scroll === true) document.getElementById("produtos").scrollIntoView({behavior:"smooth"});
+    }
+
+    function filterProducts(){ applyFilters(true); }
+
+    function setCategory(category){
+      currentCategory = category;
+      document.querySelectorAll(".menu a").forEach(a => a.classList.remove("active"));
+      const menuLink = [...document.querySelectorAll(".menu a")].find(a =>
+        a.textContent.trim().toLowerCase() === (category === "Todos" ? "início" : category.toLowerCase())
+      );
+      if(menuLink) menuLink.classList.add("active");
+      document.getElementById("searchInput").value = "";
+      applyFilters(true);
+    }
+
+    const searchInput = document.getElementById("searchInput");
+    let searchTimer;
+    searchInput.addEventListener("input", () => {           // busca enquanto digita
+      clearTimeout(searchTimer);
+      searchTimer = setTimeout(() => applyFilters(), 200);
+    });
+    searchInput.addEventListener("keydown", e => {
+      if(e.key === "Enter") filterProducts();
+    });
+
+    // WhatsApp geral
+    const generalMessage = "Olá! Vim pelo catálogo e gostaria de informações sobre os produtos.";
+    document.getElementById("topWhats").href = whatsappUrl(generalMessage);
+    document.getElementById("floatingWhats").href = whatsappUrl(generalMessage);
+
+    document.getElementById("year").textContent = new Date().getFullYear();
+    try{
+      const ids = JSON.parse(localStorage.getItem("tv_selection") || "[]");
+      selected = products.filter(p => ids.includes(p.id));
+    }catch(e){}
+    renderProducts();
+    renderSelection();
+  </script>
+</body>
+</html>
